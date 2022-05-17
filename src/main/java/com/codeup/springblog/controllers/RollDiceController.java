@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RollDiceController {
     @GetMapping
     public String showWebSite(){
-        return "/roll-dice";
+        return "view/roll-dice";
     }
 }
 //public class RollDiceController {

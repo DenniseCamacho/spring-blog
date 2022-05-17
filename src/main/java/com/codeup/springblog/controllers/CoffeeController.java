@@ -1,5 +1,7 @@
 package com.codeup.springblog.controllers;
+
 import com.codeup.springblog.models.Coffee;
+import com.codeup.springblog.respositories.CoffeeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,59 +13,62 @@ import java.util.List;
 @RequestMapping("/coffee")
 public class CoffeeController {
 
-    @GetMapping
-    public String coffeeInfo() {
-        return "views-lecture/coffee";
+    private final CoffeeRepository coffeeDao;
+
+    public CoffeeController(CoffeeRepository coffeeDao){
+        this.coffeeDao = coffeeDao;
     }
 
-    @PostMapping             //originates in name="" attribute in html
-    public String newsLetterSignup(@RequestParam(name = "email") String email, Model model) {
+    @GetMapping
+    public String allCoffees(Model model){
+        List<Coffee> coffees = coffeeDao.findAll();
+        model.addAttribute("coffees", coffees);
+        return "coffees/index";
+    }
+
+//    @GetMapping
+//    public String coffeeInfo(){
+//        return "view/coffee";
+//    }
+
+    @PostMapping
+    public String newsLetterSignup(@RequestParam(name="email") String email, Model model){
         model.addAttribute("email", email);
-        return "views-lecture/coffee";
+        return "view/coffee";
     }
 
     @GetMapping("/{roast}")
-    public String coffeeInfo(@PathVariable String roast, Model model) {
-//
-//        Coffee selection = new Coffee(roast, "Cool Beans");
-//        Coffee selection2 = new Coffee(roast, "Jolting Joe");
-//        if (roast.equals("dark")){
-//            selection.setOrigin("Colombia");
-//            selection2.setOrigin("Brazil");
-//        } else if (roast.equals("medium")){
-//            selection.setOrigin("New Guinea");
-//            selection2.setOrigin("Sumatra");
-//        } else {
-//            selection.setOrigin("Kenya");
-//            selection2.setOrigin("Ethiopia");
-//        }
-//        List<Coffee> selections = new ArrayList<>();
-//        selections.add(selection);
-//        selections.add(selection2);
-//        model.addAttribute("roast", roast);
-//        model.addAttribute("selections", selections);
-//        return "view/coffee";
-//
-
-        Coffee selection = new Coffee();
-        selection.setRoast(roast);
-        if (roast.equals("dark")) {
+    public String coffeeInfo(@PathVariable String roast, Model model){
+        Coffee selection = new Coffee(roast, "Cool Beans");
+        Coffee selection2 = new Coffee(roast, "Jolting Joe");
+        if (roast.equals("dark")){
             selection.setOrigin("Colombia");
-        } else if (roast.equals("medium")) {
+            selection2.setOrigin("Brazil");
+        } else if (roast.equals("medium")){
             selection.setOrigin("New Guinea");
+            selection2.setOrigin("Sumatra");
         } else {
             selection.setOrigin("Kenya");
+            selection2.setOrigin("Ethiopia");
         }
-        model.addAttribute("selection", selection);
-        return "views-lecture/coffee";
+        List<Coffee> selections = new ArrayList<>();
+        selections.add(selection);
+        selections.add(selection2);
+        model.addAttribute("roast", roast);
+        model.addAttribute("selections", selections);
+        return "view/coffee";
     }
-}
 
-//        model.addAttribute("roast", roast);
-//        boolean choseDark = false;
-//        if(roast.equals("dark")){
-//            choseDark = true;
-//        }
-//        model.addAttribute("choseDark", choseDark);
-//        return "viewiew/coffee";
-//    }
+    @GetMapping("/new")
+    public String addCoffeeForm(){
+        return "coffees/create";
+    }
+
+    @PostMapping("/new")
+    public String addCoffee(@RequestParam(name = "brand") String brand, @RequestParam(name = "roast") String roast, @RequestParam(name = "origin") String origin){
+        Coffee coffee = new Coffee(roast, origin, brand);
+        coffeeDao.save(coffee);
+        return "redirect:/coffee";
+    }
+
+}
