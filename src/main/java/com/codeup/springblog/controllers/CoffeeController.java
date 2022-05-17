@@ -58,7 +58,12 @@ public class CoffeeController {
         model.addAttribute("selections", selections);
         return "view/coffee";
     }
-
+    ///////////////////////
+    @GetMapping("/{id}")
+    public String editCoffee(){
+        return "view/coffee";
+    }
+    ///////////////////////
     @GetMapping("/new")
     public String addCoffeeForm(){
         return "coffees/create";
