@@ -26,10 +26,6 @@ public class CoffeeController {
         return "coffees/index";
     }
 
-//    @GetMapping
-//    public String coffeeInfo(){
-//        return "view/coffee";
-//    }
 
     @PostMapping
     public String newsLetterSignup(@RequestParam(name="email") String email, Model model){
@@ -59,10 +55,10 @@ public class CoffeeController {
         return "view/coffee";
     }
     ///////////////////////
-    @GetMapping("/{id}")
-    public String editCoffee(){
-        return "view/coffee";
-    }
+//    @GetMapping("/{id}")
+//    public String editCoffee(){
+//        return "view/coffee";
+//    }
     ///////////////////////
     @GetMapping("/new")
     public String addCoffeeForm(){
@@ -75,5 +71,4 @@ public class CoffeeController {
         coffeeDao.save(coffee);
         return "redirect:/coffee";
     }
-
 }
