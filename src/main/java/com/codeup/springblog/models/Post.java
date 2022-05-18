@@ -1,6 +1,9 @@
 package com.codeup.springblog.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -8,12 +11,23 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String body;
+    @Column(nullable = false)
     private String tags;
 
     @OneToOne
     private PostDetails postDetails;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @JsonManagedReference
+    private List<User> users;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostImage> post_images;
+
 
     public Post() {
     }
