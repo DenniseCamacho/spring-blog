@@ -12,7 +12,7 @@
             <th:block th:each="img : ${post.images}">
                 <img width="100" th:src="${img.url}" th:alt="${img.title}">
             </th:block>
-            <a th:href="@{posts/${post.id}/images}">add img</a>
+            <a th:href="@{'posts/' + ${post.id} + '/images'}">add img</a>
 
         </li>
     </ul>
