@@ -13,16 +13,26 @@ public class Post {
     private String title;
     @Column(nullable = false)
     private String body;
-    @Column(nullable = false)
-    private String tags;
 
     @OneToOne
     @JoinColumn(name = "post_details")
     private PostDetails postDetails;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+        @ManyToMany(cascade = CascadeType.ALL)
+        @JoinTable(
+                name="tags",
+                joinColumns={@JoinColumn(name="post_id")},
+                inverseJoinColumns={@JoinColumn(name="tag_id")}
+        )
+        private List<Tag> tags;
+
+
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostImage> images;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
 //    @JsonManagedReference
@@ -32,8 +42,6 @@ public class Post {
 //    private Set<PostImage> post_images;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<PostImage> images;
 
 
 
@@ -48,10 +56,16 @@ public class Post {
 
 
 
-    public Post(String title, String body, String tags) {
+    public Post(String title, String body) {
         this.title = title;
         this.body = body;
-        this.tags = tags;
+
+    }
+
+    public Post(String title, String body, Tag tags) {
+        this.title = title;
+        this.body = body;
+        this.tags = (List<Tag>) tags;
     }
 
     //SET
@@ -64,12 +78,17 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
+
     public void setImages(List<PostImage> images) {
         this.images = images;
     }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
 
 //GET
     public long getId() {
@@ -81,11 +100,14 @@ public class Post {
     public String getBody() {
         return body;
     }
-    public String getTags() {
-        return tags;
-    }
     public List<PostImage> getImages() {
         return images;
+    }
+    public User getUser() {
+        return user;
+    }
+    public List<Tag> getTags() {
+        return tags;
     }
 }
 

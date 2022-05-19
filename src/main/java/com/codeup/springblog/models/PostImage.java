@@ -12,9 +12,13 @@ public class PostImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false, length = 100)
     private String title;
-
+    @Column(nullable = false, length = 1000)
     private String url;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     public PostImage() {
     }
@@ -25,9 +29,6 @@ public class PostImage {
         this.post = post;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
 
     public long getId() {
         return id;

@@ -9,11 +9,25 @@ You will create a one-to-many relationship between the Post entity and the PostI
   post_id (a FK that will be created with the proper One-To-Many mapping)
 2. Seed your posts table with a blog post about cats
 3. Seed your post_images table with three images related to cats (use a hot-linked address for now).
+
+
+https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg
+https://images.pexels.com/photos/6589065/pexels-photo-6589065.jpeg
+https://images.pexels.com/photos/6589059/pexels-photo-6589059.jpeg
 https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg
 https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg
 https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg
-
-
-
 4. Create a simple view that includes displays the title of the cat blog post the three images
 5 (BONUS). Add a form to add additional images to the cat blog post.
+
+Many-to-Many Exercise:
+You will create a many-to-many relationship between posts and tags. Consider that...
+  - “A post may have many tags.”
+  - “A tag may be assigned to many posts.”
+1. Create a Tag entity class that has the following properties:
+  id (typical primary key annotations)
+  name VARCHAR(50)
+2. Add the proper many-to-many annotations on both entities (Post and Tag) to properly map the relationship. The “join” table should be called “post_tag” and only contain the foreign keys for post_id and tag_id.
+3. Seed the tags table with three tags named the following: “Silly”, “Funny”, and “Humor”.
+4. Seed the post_tag table with one post that has the “Silly” and “Funny” tags and another having the “Humor” and “Funny” tags. In total, you will need to insert four records.
+5. Create a view that will display the titles of posts with the “Funny” tag (you should see the two titles of the posts with the “Funny” tags).

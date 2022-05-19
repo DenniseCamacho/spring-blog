@@ -8,11 +8,14 @@
         <li>
             <h2 th:text="${post.title}"></h2>
             <p th:text="${post.body}"></p>
-            <details th:text="${post.tags}"></details>
+            <details th:each="tag ${post.tags}" th:text="${tag.name}"></details>
             <th:block th:each="img : ${post.images}">
                 <img width="100" th:src="${img.url}" th:alt="${img.title}">
             </th:block>
-            <a th:href="@{'posts/' + ${post.id} + '/images'}">add img</a>
+            <a th:href="@{'posts/' + ${post.id} + '/images'}">add img</a><br>
+            Post by: <th:span th:each="user : ${post.user}"><p th:text="${user}"></p>
+            </th:span>
+
 
         </li>
     </ul>
