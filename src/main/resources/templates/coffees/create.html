@@ -4,18 +4,21 @@
 <body>
 <div th:replace="partials/partials.html :: navbar"></div>
 <div th:replace="partials/partials.html :: header"></div>
-<fieldset>
-    <legend>Add a Coffee</legend>
-    <form action="/coffee/new" method="post">
-        <label for="brand">Brand:</label>
-        <input type="text" id="brand" name="brand">
-        <label for="roast">Roast:</label>
-        <input type="text" id="roast" name="roast">
-        <label for="origin">Origin:</label>
-        <input type="text" id="origin" name="origin">
-        <input type="submit" value="submit">
+
+    <form th:action="@{/coffees/create}"
+          th:method="post" th:object="${coffee}">
+        <label for="brand">Brand</label>
+        <input type="text" th:field="*{brand}"  id="brand" />
+
+        <label for="origin">Roast</label>
+        <input type="text" th:field="*{roast}"  id="roast" />
+
+        <label for="origin">Origin</label>
+        <input type="text" th:field="*{origin}" id="origin" />
+
+        <button>Submit</button>
     </form>
-</fieldset>
+
 <div th:replace="partials/partials.html :: footer"></div>
 </body>
 </html>

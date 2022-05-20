@@ -31,3 +31,18 @@ You will create a many-to-many relationship between posts and tags. Consider tha
 3. Seed the tags table with three tags named the following: “Silly”, “Funny”, and “Humor”.
 4. Seed the post_tag table with one post that has the “Silly” and “Funny” tags and another having the “Humor” and “Funny” tags. In total, you will need to insert four records.
 5. Create a view that will display the titles of posts with the “Funny” tag (you should see the two titles of the posts with the “Funny” tags).
+
+
+Mini Assignment: Update!
+Add update/delete functionality (crUD)
+Use form model binding to: (UPDATE)
+1. Update any existing controller to add in the functionality for updating a record in a form view.
+2. Load the existing record into the forms values.
+3. Form should be able to submit the changes and the controller will update the record in the database.
+4. After update the record should return to the main page for that record (i.e index of ad's)
+(DELETE)
+1. Add a delete method to a controller.
+2. When called the record with the id passed to it will be deleted.
+3. Use a form to pass the id of the element you are deleting to the controller.
+
+

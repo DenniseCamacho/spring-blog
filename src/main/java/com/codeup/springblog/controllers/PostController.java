@@ -2,7 +2,6 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.PostImage;
-import com.codeup.springblog.models.Tag;
 import com.codeup.springblog.respositories.PostRepository;
 import com.codeup.springblog.respositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/posts")
@@ -67,10 +65,10 @@ public class PostController {
 
     @PostMapping("/create")
     public String submitPost(
-            @RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @RequestParam(name = "tags") Tag tags
+            @RequestParam(name = "title") String title, @RequestParam(name = "body") String body
     )
     {
-        Post post = new Post(title, body, tags);
+        Post post = new Post(title, body);
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -96,8 +94,4 @@ public class PostController {
         postDao.save(post);
         return "redirect:/posts";
     }
-
-
-
-
 }

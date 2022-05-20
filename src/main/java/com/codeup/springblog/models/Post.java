@@ -28,9 +28,6 @@ public class Post {
         )
         private List<Tag> tags;
 
-
-
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostImage> images;
 
@@ -62,11 +59,6 @@ public class Post {
 
     }
 
-    public Post(String title, String body, Tag tags) {
-        this.title = title;
-        this.body = body;
-        this.tags = (List<Tag>) tags;
-    }
 
     //SET
     public void setId(long id) {

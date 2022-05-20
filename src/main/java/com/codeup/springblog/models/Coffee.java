@@ -10,29 +10,17 @@ public class Coffee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String roast;
 
     @Column(nullable = false)
     private String origin;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String brand;
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
 
     public Coffee() {
-    }
-
-    public Coffee(String roast, String brand) {
-        this.roast = roast;
-        this.brand = brand;
     }
 
     public Coffee(String roast, String origin, String brand) {
@@ -40,20 +28,32 @@ public class Coffee {
         this.origin = origin;
         this.brand = brand;
     }
+    public void setId(long id) {
+        this.id = id;
+    }
+    public void setRoast(String roast) {
+        this.roast = roast;
+    }
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public long getId() {
+        return id;
+    }
     public String getRoast() {
         return roast;
     }
-
-    public void setRoast(String roast) {
-        this.roast = roast;
+    public String getBrand() {
+        return brand;
     }
 
     public String getOrigin() {
         return origin;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
 }

@@ -5,15 +5,29 @@
 <div th:replace="partials/partials.html :: navbar"></div>
 <div th:replace="partials/partials.html :: header"></div>
 
-<div th:if="${coffees}">
-    <ul>
-        <li th:each="coffee : ${coffees}">
-            <span th:text="${coffee.brand}"></span>
-            <span th:text="${coffee.roast}"></span>
-            <span th:text="${coffee.origin}"></span><br>
-    <button class="btn btn-dark mx-5 my-2">edit</button><button class="btn btn-dark">delete</button>
-        </li>
-    </ul>
+<div th:if="${coffees}" class="container">
+    <div class="row d-flex justify-content-around d-grid gap-3">
+        <div th:each="coffee : ${coffees}" class="col-6 card border-dark text-center px-0" style="max-width: 15rem;">
+            <span th:text="${coffee.brand}" class="card-header"></span>
+            <span th:text="${coffee.roast}" class="card-body text-dark"></span>
+            <span th:text="${coffee.origin}" class="card-text"></span><br>
+
+            <div class="d-flex flex-row justify-content-around">
+                <form th:method="post"
+                      th:action="@{/coffees/delete}">
+                    <button type="submit" name="id" th:value="${coffee.id}" class="btn btn-dark">delete</button>
+                </form>
+                <form th:method="GET"
+                      th:action="@{/coffees/update/{id}(id=${coffee.id})}">
+                    <button type="submit" class="btn btn-dark">edit</button>
+                </form>
+            </div>
+            <form class="card-footer text-muted" th:method="GET"
+                  th:action="@{/coffees/create}">
+               <button class="btn text-muted border-0">add coffee+</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div th:replace="partials/partials.html :: footer"></div>
