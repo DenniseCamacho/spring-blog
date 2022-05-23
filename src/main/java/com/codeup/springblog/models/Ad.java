@@ -2,11 +2,10 @@ package com.codeup.springblog.models;
 
 import javax.persistence.*;
 
-//to turn into a jap hibernate entity:
 @Entity
 @Table(name = "ads")
 public class Ad {
-    @Id //vvvvgenerates to table.......
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
@@ -15,9 +14,8 @@ public class Ad {
     @Column(nullable = false)
     private String description;
 
-    public Ad() {
+    public Ad(){}
 
-    }
     public Ad(long id, long userId, String title, String description) {
         this.id = id;
         this.userId = userId;
@@ -30,7 +28,6 @@ public class Ad {
         this.title = title;
         this.description = description;
     }
-
 
     public long getId() {
         return id;
